@@ -69,7 +69,10 @@
                 { name: "lowerCase", policy: { value: ${passwordPolicies.lowerCase!-1}, error: "${msg('invalidPasswordMinLowerCaseCharsMessage')}"} },
                 { name: "upperCase", policy: { value: ${passwordPolicies.upperCase!-1}, error: "${msg('invalidPasswordMinUpperCaseCharsMessage')}"} },
                 { name: "digits", policy: { value: ${passwordPolicies.digits!-1}, error: "${msg('invalidPasswordMinDigitsMessage')}"} },
-                { name: "specialChars", policy: { value: ${passwordPolicies.specialChars!-1}, error: "${msg('invalidPasswordMinSpecialCharsMessage')}"} }
+                { name: "specialChars", policy: { value: ${passwordPolicies.specialChars!-1}, error: "${msg('invalidPasswordMinSpecialCharsMessage')}"} },
+                <#if passwordPolicies.regexPattern?has_content>
+                    { name: "regexPattern", policy: { value: "${passwordPolicies.regexPattern?js_string}", error: "${msg('invalidPasswordRegexPatternMessage')}"} }
+                </#if>
             ].filter(p => p.policy.value !== -1);
 
             document.getElementById("password").addEventListener("change", (event) => {

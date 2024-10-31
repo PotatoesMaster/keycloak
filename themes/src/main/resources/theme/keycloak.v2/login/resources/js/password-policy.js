@@ -37,6 +37,11 @@ const policies = {
       return templateError(policy);
     }
   },
+  regexPattern: (policy, value) => {
+    if (value && !policy.value.match(value)) {
+      return templateError(policy);
+    }
+  },
 };
 
 const templateError = (policy) => policy.error.replace("{0}", policy.value);
